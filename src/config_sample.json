@@ -1,0 +1,10 @@
+{
+  "app": {
+    "name": "atdd_example",
+    "host": "http://localhost",
+    "port": "4000"
+  },
+  "database": {
+    "uri": "mongodb://127.0.0.1:27017/atdd_example?w=1"
+  }
+}

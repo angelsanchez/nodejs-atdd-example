@@ -1,0 +1,48 @@
+{
+  "name": "nodejs-atdd-example",
+  "version": "0.0.1",
+  "description": "ATDD Example",
+  "main": "bin/server.js",
+  "scripts": {
+    "start": "node ./src/start.js",
+    "test-unit": "./node_modules/.bin/mocha --recursive test-unit",
+    "test-integration": "./node_modules/.bin/mocha --recursive test-integration",
+    "test-acceptance": "./node_modules/.bin/cucumber-js test-acceptance/features -r test-acceptance/step_definitions --tags ~@skip --format pretty --strict"
+  },
+  "pre-commit": [
+    "style",
+    "lint",
+    "test"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/IGZangelsanchez/nodejs-atdd-example.git"
+  },
+  "keywords": [
+    "nodejs",
+    "api",
+    "template"
+  ],
+  "author": "Angel Sanchez",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/IGZangelsanchez/nodejs-atdd-example/issues"
+  },
+  "homepage": "https://github.com/IGZangelsanchez/nodejs-atdd-example",
+  "dependencies": {
+    "mongodb": "2.0.45",
+    "restify": "4.0.3",
+    "tv4": "^1.2.7",
+    "winston": "1.1.1"
+  },
+  "devDependencies": {
+    "request": "2.64.0",
+    "cucumber": "0.6.0",
+    "mocha": "2.3.3",
+    "mockery": "1.4.0",
+    "sinon": "1.17.1"
+  },
+  "engines": {
+    "node": ">= 4.2.2"
+  }
+}

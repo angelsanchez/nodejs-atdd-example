@@ -1,0 +1,11 @@
+machine:
+  node:
+    version: 4.2.2
+  services:
+    - mongodb
+test:
+  pre:
+    - cp src/config_sample.json src/config.json
+  override:
+    - npm test
+    - npm run test-acceptance
