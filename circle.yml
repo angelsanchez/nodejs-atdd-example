@@ -1,13 +1,13 @@
 machine:
-  node:
-    version: 4.2.2
-  services:
-    - mongodb
+    node:
+        version: 4.2.2
+    services:
+        - mongodb
 test:
-  pre:
-    - cp src/config_sample.json src/config.json
-    - npm start
-       background: true
-    - sleep 2
-  override:
-    - npm run test-acceptance
+    pre:
+        - cp src/config_sample.json src/config.json
+        - npm start:
+            background: true
+        - sleep 2
+    override:
+        - npm run test-acceptance
