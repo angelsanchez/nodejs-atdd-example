@@ -6,6 +6,6 @@ machine:
 test:
   pre:
     - cp src/config_sample.json src/config.json
+    - npm start &
   override:
-    - npm test
     - npm run test-acceptance
