@@ -6,6 +6,8 @@ machine:
 test:
   pre:
     - cp src/config_sample.json src/config.json
-    - npm start &
+    - npm start
+       background: true
+    - sleep 2
   override:
     - npm run test-acceptance
