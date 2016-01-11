@@ -1,8 +1,17 @@
 'use strict';
 
 const config = require('../../src/config.js');
+const httpServices = require('../../src/http_services');
 
 module.exports = function () {
+
+    this.BeforeFeatures((event, done) => {
+        httpServices
+            .start(config.app.port)
+            .then(done)
+            .catch(done.fail);
+    });
+
     this.Before(done => {
         this.world = {};
         cleanDB(done);
