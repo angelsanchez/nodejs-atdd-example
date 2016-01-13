@@ -1,16 +1,14 @@
 'use strict';
 
-const connect = require('../storage/connect');
+const retrieveFromStorage = require('../storage/retrieve_from_storage');
 const logger = require('../logger');
 
-module.exports = (customCriteria) => {
-    const criteria = customCriteria || {};
-    return new Promise((resolve, reject) => {
-        connect()
-            .then(db => db.collection('authors').find(criteria, {_id: 0}).limit(100))
-            .then(usersCursor => {
-                resolve(usersCursor.toArray());
-            })
-            .catch(reject);
-    });
+module.exports = () => {
+    const criteria = {};
+
+    return retrieveFromStorage('authors', criteria)
+        .then(authorsCursor => {
+            return Promise.resolve(authorsCursor.toArray());
+        })
+        .catch(err => Promise.reject(err));
 };

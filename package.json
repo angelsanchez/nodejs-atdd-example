@@ -37,11 +37,11 @@
     "winston": "1.1.1"
   },
   "devDependencies": {
-    "coveralls": "^2.11.6",
+    "coveralls": "2.11.6",
     "cucumber": "0.6.0",
-    "istanbul": "^0.4.2",
-    "istanbul-coveralls": "^1.0.3",
-    "mocha": "2.3.3",
+    "istanbul": "0.4.2",
+    "istanbul-coveralls": "1.0.3",
+    "mocha": "2.3.4",
     "mockery": "1.4.0",
     "request": "2.64.0",
     "sinon": "1.17.1"

@@ -1,6 +1,6 @@
 'use strict';
 
-const connect = require('./connect.js');
+const connect = require('./connect');
 const logger = require('../logger');
 
 module.exports = (collectionName, customCriteria) => {
