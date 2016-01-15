@@ -9,14 +9,8 @@ module.exports = function() {
         clientAPI
             .retrieveAuthors()
             .then(res => {
-
                 world.lastResponseStatusCode = res.statusCode;
-                world.parsedAuthors = res.body.authors.map(author => {
-                    if (author.born) author.born = new Date(author.born);
-                    if (author.died) author.died = new Date(author.died);
-                    return author;
-                });
-
+                world.lastResponseBody = res.body;
                 done();
             })
             .catch(done.fail);

@@ -7,4 +7,6 @@ test:
     pre:
         - cp src/config_sample.json src/config.json
     override:
+        - npm run test-unit
+        - npm run test-integration
         - npm run test-coverage

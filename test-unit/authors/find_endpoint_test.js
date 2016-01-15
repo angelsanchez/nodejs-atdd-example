@@ -1,7 +1,7 @@
 'use strict';
 
 const mockery = require('mockery');
-const assert = require('assert');
+const expect = require('chai').expect;
 
 const authorList = [
     {name: 'Isaac Asimov'},
@@ -24,8 +24,8 @@ describe('Endpoint: List of authors', () => {
         };
 
         findAuthorsEndpoint(requestStub, responseStub, () => {
-            assert.strictEqual(res.statusCode, 200);
-            assert.deepEqual(res.body.authors, authorList);
+            expect(res.statusCode).to.equal(200);
+            expect(res.body.authors).to.deep.equal(authorList);
             done();
         });
     });

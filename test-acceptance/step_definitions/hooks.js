@@ -9,7 +9,7 @@ module.exports = function () {
         httpServices
             .start(config.app.port)
             .then(done)
-            .catch(done.fail);
+            .catch(err => done(err));
     });
 
     this.Before(done => {
@@ -28,5 +28,5 @@ function cleanDB(done) {
             Promise.all(collections.map(collection => collection.remove()))
         })
         .then(done)
-        .catch(done);
+        .catch(err => done(err));
 }

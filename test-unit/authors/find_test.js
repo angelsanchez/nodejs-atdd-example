@@ -1,7 +1,7 @@
 'use strict';
 
 const mockery = require('mockery');
-const assert = require('assert');
+const expect = require('chai').expect;
 
 describe('List of authors', () => {
 
@@ -27,13 +27,13 @@ describe('List of authors', () => {
         const findAuthors = getFindAuthorsInstance(retrieveFromStorageStub);
 
         findAuthors().then(authors => {
-            assert.deepEqual(authors, authorList);
+            expect(authors).to.deep.equal(authorList);
             done();
         }).catch(err => done(err));
     });
 
-    function getFindAuthorsInstance(storageRetrieveFromStorageStub) {
-        mockery.registerMock('../storage/retrieve_from_storage', storageRetrieveFromStorageStub);
+    function getFindAuthorsInstance(storageFindStub) {
+        mockery.registerMock('../storage/find', storageFindStub);
 
         mockery.enable({
             useCleanCache: true,

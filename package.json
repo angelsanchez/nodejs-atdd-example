@@ -7,8 +7,8 @@
     "start": "node ./src/start.js",
     "test-unit": "./node_modules/.bin/mocha --recursive test-unit",
     "test-integration": "./node_modules/.bin/mocha --recursive test-integration",
-    "test-acceptance": "./node_modules/.bin/cucumber.js test-acceptance/features -r test-acceptance/step_definitions --tags ~@skip --format pretty --strict",
-    "test-coverage": "node node_modules/istanbul/lib/cli.js cover ./node_modules/.bin/cucumber.js --lcovonly -- test-acceptance/features  -r test-acceptance/step_definitions --tags ~@skip && istanbul-coveralls"
+    "test-acceptance": "./node_modules/.bin/cucumber.js test-acceptance/features -r test-acceptance/step_definitions",
+    "test-coverage": "node node_modules/istanbul/lib/cli.js cover ./node_modules/.bin/cucumber.js --lcovonly -- test-acceptance/features -r test-acceptance/step_definitions && istanbul-coveralls"
   },
   "pre-commit": [
     "style",
@@ -37,6 +37,7 @@
     "winston": "1.1.1"
   },
   "devDependencies": {
+    "chai": "3.4.1",
     "coveralls": "2.11.6",
     "cucumber": "0.6.0",
     "istanbul": "0.4.2",

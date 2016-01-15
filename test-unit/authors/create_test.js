@@ -1,14 +1,9 @@
 'use strict';
 
 const mockery = require('mockery');
-const assert = require('assert');
+const expect = require('chai').expect;
 
 const validAuthor = {
-    name: 'Isaac Asimov',
-    born: '02-01-1920'
-};
-
-const completeValidAuthor = {
     name: 'Isaac Asimov',
     born: '02-01-1920',
     died: '06-04-1992',
@@ -40,8 +35,8 @@ describe('Create authors', () => {
         const createAuthor = getCreateAuthorInstance(storageCreateStub);
 
         createAuthor(validAuthor).then(author => {
-            assert.deepEqual(author, createdAuthor);
-            assert.ok(author._id);
+            expect(author).to.deep.equal(createdAuthor);
+            expect(author._id).to.exist;
             done();
         }).catch(err => done(err));
     });
@@ -53,31 +48,14 @@ describe('Create authors', () => {
         const createAuthor = getCreateAuthorInstance(storageCreateStub);
 
         createAuthor(invalidAuthor).then(() => done('Error: the author should be invalid')).catch(err => {
-            assert.strictEqual(err.code, 'validation_error');
-            assert.ok(err.errors);
+            expect(err.code).to.equal('validation_error');
+            expect(err.errors).to.exist;
             done();
         });
     });
 
-    it('Should return the complete author example after creating', done => {
-
-        const createdAuthor = Object.assign({_id: '1234'}, validAuthor);
-
-        const storageCreateStub = () => {
-            return Promise.resolve(createdAuthor);
-        };
-
-        const createAuthor = getCreateAuthorInstance(storageCreateStub);
-
-        createAuthor(validAuthor).then(author => {
-            assert.deepEqual(author, createdAuthor);
-            assert.ok(author._id);
-            done();
-        }).catch(err => done(err));
-    });
-
     function getCreateAuthorInstance(storageCreateStub) {
-        mockery.registerMock('../storage/persist_on_storage', storageCreateStub);
+        mockery.registerMock('../storage/save', storageCreateStub);
 
         mockery.enable({
             useCleanCache: true,
