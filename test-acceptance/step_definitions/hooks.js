@@ -23,10 +23,13 @@ module.exports = function () {
 function cleanDB(done) {
     const connect = require('../../src/storage/connect');
     connect()
-        .then(db => db.collections())
-        .then(collections => {
-            Promise.all(collections.map(collection => collection.remove()))
+        .then(db => {
+            db.dropDatabase((err, result) => {
+                if( err ){
+                    return done(err);
+                }
+                done();
+            });
         })
-        .then(done)
         .catch(err => done(err));
 }
