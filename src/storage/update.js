@@ -5,19 +5,19 @@ const logger = require('../logger');
 
 module.exports = (collectionName, criteria, update) => {
 
-    return connect()
-        .then(db => {
+  return connect()
+    .then(db => {
 
-            db.collection(collectionName)
-                .updateOne(criteria, update, (err, result) => {
-                    if (err) {
-                        logger.error('Unable to update element from db, collection name: ' + collectionName + ', criteria: ' + criteria + ' error message: ' + err);
-                        return Promise.reject(err);
-                    }
+      db.collection(collectionName)
+        .updateOne(criteria, update, (err, result) => {
+          if (err) {
+            logger.error(`Unable to update element from db, collection name: ${collectionName}, criteria: ${JSON.stringify(criteria)} error:`, err);
+            return Promise.reject(err);
+          }
 
-                    Promise.resolve(result);
-                });
+          return Promise.resolve(result);
+        });
 
-        })
-        .catch(err => Promise.reject(err));
+    })
+    .catch(err => Promise.reject(err));
 };

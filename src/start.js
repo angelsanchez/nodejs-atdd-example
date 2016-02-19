@@ -1,14 +1,14 @@
 'use strict';
 
-const config = require('./config.js');
-const httpServices = require('./http_services.js');
-const logger = require('./logger.js');
+const config = require('./config');
+const httpServices = require('./http_services');
+const logger = require('./logger');
 
 httpServices
-    .start(config.app.port)
-    .then(server => {
-        logger.info('Server started at:', server.url);
-    })
-    .catch(error => {
-        logger.error('Unable to start server, ' + error);
-    });
+  .start(config.app.port)
+  .then(server => {
+    logger.info('Server started at:', server.url);
+  })
+  .catch(error => {
+    logger.error('Unable to start server, ', error);
+  });
