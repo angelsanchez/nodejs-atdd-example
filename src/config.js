@@ -1,12 +1,11 @@
 'use strict';
 /* eslint-disable no-process-env */
 
-const fs = require('fs');
-const configJson = fs.existsSync(`${process.cwd()}/src/config.json`) ? require('./config.json') : undefined;
+const configJson = require('./config.json');
 
 require('dotenv').config();
 
-module.exports = {
+module.exports = Object.assign({}, configJson, {
   app: {
     name: process.env.APP_NAME || configJson.app.name,
     host: process.env.APP_HOST || configJson.app.host,
@@ -16,4 +15,4 @@ module.exports = {
     uri: process.env.DB_URI || configJson.database.uri,
     connectOptions: {}
   }
-};
+});
