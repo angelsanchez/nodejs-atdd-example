@@ -2,10 +2,10 @@
 
 const HTTP = require('http-status-codes');
 
-const authorsFind = require('./find');
+const findAllAuthors = require('./find_all');
 
 module.exports = (request, response, next) => {
-  authorsFind()
+  findAllAuthors()
     .then(authors => {
       response.json({authors});
       return next();

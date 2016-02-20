@@ -10,7 +10,7 @@ const authorList = [
 ];
 
 function getFindAuthorsEndpointInstance(findAuthorsStub) {
-  mockery.registerMock('./find', findAuthorsStub);
+  mockery.registerMock('./find_all', findAuthorsStub);
 
   mockery.enable({
     useCleanCache: true,

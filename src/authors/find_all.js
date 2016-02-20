@@ -7,7 +7,6 @@ module.exports = () => {
 
   return storageFind('authors', criteria)
     .then(authorsCursor => {
-      return Promise.resolve(authorsCursor.toArray());
-    })
-    .catch(err => Promise.reject(err));
+      return authorsCursor.toArray();
+    });
 };

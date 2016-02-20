@@ -12,7 +12,7 @@ function getFindAuthorsInstance(storageFindStub) {
     warnOnUnregistered: false
   });
 
-  return require('../../../src/authors/find');
+  return require('../../../src/authors/find_all');
 }
 
 describe('List of authors', () => {
