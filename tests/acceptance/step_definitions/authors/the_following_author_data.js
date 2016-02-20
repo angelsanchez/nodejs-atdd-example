@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = function () {
+module.exports = function() {
   this.When(/^the following author data$/, (authorsTable, done) => {
     const authorRow = authorsTable.hashes()[0];
 

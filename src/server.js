@@ -1,7 +1,7 @@
 'use strict';
 
 const restify = require('restify');
-const logger = require('./logger');
+const logger = require('./util/logger');
 const registerServices = require('./register_services');
 
 const server = restify.createServer();

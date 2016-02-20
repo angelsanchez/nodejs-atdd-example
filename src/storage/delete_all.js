@@ -1,7 +1,7 @@
 'use strict';
 
 const connect = require('./connect');
-const logger = require('../logger');
+const logger = require('../util/logger');
 
 module.exports = collectionName => {
   return connect()

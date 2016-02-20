@@ -3,9 +3,7 @@
 const config = require('../../../src/config');
 const request = require('./request');
 
-function getAPIUrl(resource) {
-  return `${config.app.host}:${config.app.port}/api${resource}`;
-}
+const getAPIUrl = resource => `${config.app.host}:${config.app.port}/api${resource}`;
 
 module.exports = {
   retrieveAuthors: () => {

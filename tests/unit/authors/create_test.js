@@ -1,7 +1,7 @@
 'use strict';
 
 const mockery = require('mockery');
-const expect = require('chai').expect;
+const expect = require('../dirty-chai').expect;
 const testData = require('./test_data');
 
 const validAuthor = testData.validAuthor;
@@ -10,7 +10,7 @@ const invalidAuthor = {
   name: 'Isaac Asimov'
 };
 
-function getCreateAuthorInstance(storageCreateStub) {
+const getCreateAuthorInstance = storageCreateStub => {
   mockery.registerMock('../storage/save', storageCreateStub);
 
   mockery.enable({
@@ -20,7 +20,7 @@ function getCreateAuthorInstance(storageCreateStub) {
   });
 
   return require('../../../src/authors/create');
-}
+};
 
 describe('Create authors', () => {
 
@@ -58,7 +58,7 @@ describe('Create authors', () => {
         expect(err.code).to.equal('validation_error');
         expect(err.errors).to.exist();
         done();
-    });
+      });
   });
 
 });

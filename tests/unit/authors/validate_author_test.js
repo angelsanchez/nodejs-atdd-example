@@ -1,6 +1,6 @@
 'use strict';
 
-const expect = require('chai').expect;
+const expect = require('../dirty-chai').expect;
 const validateAuthor = require('../../../src/authors/validate_author');
 const testData = require('./test_data');
 
@@ -29,11 +29,11 @@ describe('Schema validation', () => {
         expect(err).to.have.property('errors')
           .that.is.an('array')
           .that.deep.equals([
-            { message: 'Missing required property: name'},
-            { message: 'Missing required property: born'}
+          {message: 'Missing required property: name'},
+          {message: 'Missing required property: born'}
         ]);
         return done();
-    });
+      });
   });
 
 });

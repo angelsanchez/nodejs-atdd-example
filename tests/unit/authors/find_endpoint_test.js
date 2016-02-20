@@ -2,14 +2,14 @@
 
 const HTTP = require('http-status-codes');
 const mockery = require('mockery');
-const expect = require('chai').expect;
+const expect = require('../dirty-chai').expect;
 
 const authorList = [
   {name: 'Isaac Asimov'},
   {name: 'Frank Herbert'}
 ];
 
-function getFindAuthorsEndpointInstance(findAuthorsStub) {
+const getFindAuthorsEndpointInstance = findAuthorsStub => {
   mockery.registerMock('./find_all', findAuthorsStub);
 
   mockery.enable({
@@ -19,7 +19,7 @@ function getFindAuthorsEndpointInstance(findAuthorsStub) {
   });
 
   return require('../../../src/authors/find_endpoint');
-}
+};
 
 describe('Endpoint: List of authors', () => {
 

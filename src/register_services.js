@@ -1,11 +1,7 @@
 'use strict';
 
-const modules = [
+const routesList = [
   require('./authors/routes')
 ];
 
-module.exports = server => {
-  modules.forEach(module => {
-    module(server);
-  });
-};
+module.exports = server => routesList.forEach(addRoutes => addRoutes(server));

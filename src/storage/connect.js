@@ -3,7 +3,7 @@
 const MongoClient = require('mongodb').MongoClient;
 
 const config = require('../config');
-const logger = require('../logger');
+const logger = require('../util/logger');
 
 module.exports = () => MongoClient.connect(config.database.uri, config.database.connectOptions)
   .then(db => {

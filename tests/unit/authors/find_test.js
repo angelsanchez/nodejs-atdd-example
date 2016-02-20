@@ -1,9 +1,9 @@
 'use strict';
 
 const mockery = require('mockery');
-const expect = require('chai').expect;
+const expect = require('../dirty-chai').expect;
 
-function getFindAuthorsInstance(storageFindStub) {
+const getFindAuthorsInstance = storageFindStub => {
   mockery.registerMock('../storage/find', storageFindStub);
 
   mockery.enable({
@@ -13,7 +13,7 @@ function getFindAuthorsInstance(storageFindStub) {
   });
 
   return require('../../../src/authors/find_all');
-}
+};
 
 describe('List of authors', () => {
 

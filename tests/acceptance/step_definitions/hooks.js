@@ -1,12 +1,10 @@
 'use strict';
 
 const config = require('../../../src/config');
-const httpServices = require('../../../src/http_services');
+const httpServices = require('../../../src/server');
 const connect = require('../../../src/storage/connect');
 
-const cleanDB = done => {
-  connect().then(db => db.dropDatabase(done)).catch(done);
-};
+const cleanDB = done => connect().then(db => db.dropDatabase(done)).catch(done);
 
 module.exports = function() {
 
@@ -14,13 +12,14 @@ module.exports = function() {
     httpServices
       .start(config.app.port)
       .then(done)
-      .catch(err => done(err));
+      .catch(done);
   });
 
-  this.Before(done => {
+  this.Before(() => {
     this.world = {};
-    cleanDB(done);
   });
+
+  this.Before(cleanDB);
 
   this.After(cleanDB);
 };

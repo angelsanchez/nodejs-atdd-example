@@ -10,8 +10,8 @@ module.exports = {
         resolveWithFullResponse: true
       })
       .then(res => ({
-          statusCode: res.statusCode,
-          body: res.body
+        statusCode: res.statusCode,
+        body: res.body
       }));
   },
   post: (url, body) => {
@@ -21,8 +21,8 @@ module.exports = {
         resolveWithFullResponse: true
       })
       .then(res => ({
-          statusCode: res.statusCode,
-          body: res.body
+        statusCode: res.statusCode,
+        body: res.body
       }));
   }
 };

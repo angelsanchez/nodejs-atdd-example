@@ -2,25 +2,14 @@
 
 const save = require('../../../src/storage/save');
 const connect = require('../../../src/storage/connect');
-const chai = require('chai');
-const expect = require('chai').expect;
+const expect = require('../dirty-chai').expect;
 
-const dirtyChai = require('dirty-chai');
+const dropTestCollection = done => connect()
+  .then(db => {
+    const col = db.listCollections({name: 'test'})[0];
+    return col ? db.dropCollection(col).then(done) : done();
+  }).catch(done);
 
-chai.use(dirtyChai);
-
-function dropTestCollection(done) {
-  connect()
-    .then(db => {
-      db.listCollections().toArray((err, replies) => {
-        if (replies.some(doc => doc.name === 'test')) {
-          return db.collection('test').drop(done);
-        }
-        return done();
-      });
-    })
-    .catch(done);
-}
 describe('Storage save integration tests', () => {
 
   afterEach(dropTestCollection);

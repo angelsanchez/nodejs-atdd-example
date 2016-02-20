@@ -4,7 +4,7 @@ const HTTP = require('http-status-codes');
 const mockery = require('mockery');
 const expect = require('chai').expect;
 
-function getCreateAuthorEndpointInstance(createAuthorsStub) {
+const getCreateAuthorEndpointInstance = createAuthorsStub => {
   mockery.registerMock('./create', createAuthorsStub);
 
   mockery.enable({
@@ -14,7 +14,7 @@ function getCreateAuthorEndpointInstance(createAuthorsStub) {
   });
 
   return require('../../../src/authors/create_endpoint');
-}
+};
 
 describe('Endpoint: Create an author', () => {
 
