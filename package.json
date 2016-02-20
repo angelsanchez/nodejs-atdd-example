@@ -7,7 +7,7 @@
     "start": "node ./bin/server",
     "lint": "eslint src test*",
     "pretest": "npm run lint",
-    "test": "npm run test-unit && npm run test-integration && npm run test-acceptance && npm run coverage",
+    "test": "npm run test-unit && npm run test-integration && npm run test-acceptance",
     "test-unit": "mocha --recursive tests/unit",
     "test-integration": "mocha --recursive tests/integration",
     "test-acceptance": "cucumber.js tests/acceptance/features -r tests/acceptance/step_definitions",
@@ -18,7 +18,7 @@
     "coveralls": "istanbul-coveralls"
   },
   "pre-commit": [
-    "test"
+    "lint"
   ],
   "repository": {
     "type": "git",

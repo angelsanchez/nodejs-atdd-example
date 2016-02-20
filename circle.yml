@@ -8,4 +8,5 @@ test:
         - cp src/config_sample.json src/config.json
     override:
         - npm run test
+        - npm run coverage
         - npm run coveralls
