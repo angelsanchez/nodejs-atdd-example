@@ -1,46 +1,28 @@
 'use strict';
 
-const request = require('request');
+const request = require('request-promise');
 
 module.exports = {
   get: url => {
-    return new Promise((resolve, reject) => {
-      const options = {
+    return request.get({
         uri: url,
-        method: 'GET',
-        json: true
-      };
-
-      request(options,
-        (err, res, body) => {
-          if (err) {
-            reject(err);
-          }
-          else {
-            resolve({statusCode: res.statusCode, body });
-          }
-        }
-      );
-    });
+        json: true,
+        resolveWithFullResponse: true
+      })
+      .then(res => ({
+          statusCode: res.statusCode,
+          body: res.body
+      }));
   },
   post: (url, body) => {
-    return new Promise((resolve, reject) => {
-      const options = {
+    return request.post({
         uri: url,
-        method: 'POST',
-        json: body
-      };
-
-      request(options,
-        (err, res, responseBody) => {
-          if (err) {
-            reject(err);
-          }
-          else {
-            resolve({statusCode: res.statusCode, body: responseBody});
-          }
-        }
-      );
-    });
+        json: body,
+        resolveWithFullResponse: true
+      })
+      .then(res => ({
+          statusCode: res.statusCode,
+          body: res.body
+      }));
   }
 };

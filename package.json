@@ -2,9 +2,9 @@
   "name": "nodejs-atdd-example",
   "version": "0.0.1",
   "description": "ATDD Example",
-  "main": "bin/server.js",
+  "main": "bin/server",
   "scripts": {
-    "start": "node ./src/start.js",
+    "start": "node ./bin/server",
     "lint": "eslint src test*",
     "pretest": "npm run lint",
     "test": "npm run test-unit && npm run test-integration && npm run test-acceptance && npm run coverage",
@@ -64,7 +64,7 @@
     "mocha-lcov-reporter": "^1.1.0",
     "mockery": "1.4.0",
     "pre-commit": "^1.1.2",
-    "request": "^2.69.0",
+    "request-promise": "^2.0.1",
     "sinon": "^1.17.3"
   },
   "engines": {
