@@ -1,18 +1,25 @@
 'use strict';
 
-const winston = require('winston');
+const bunyan = require('bunyan');
+const devnull = require('dev-null');
 
-const DEFAULT_TRANSPORT = new (winston.transports.Console)({
-  colorize: 'all',
-  timestamp: true,
-  json: false,
-  handleExceptions: true
+const config = require('../config');
+const customSerializers = require('./custom_bunyan_serializers');
+
+const defaultStreams = [{ stream: process.stdout }];
+const testStreams = [{ stream: devnull() }];
+
+const envConfig = {
+  production: defaultStreams,
+  test: testStreams
+};
+
+// eslint-disable-next-line no-process-env
+const streams = envConfig[process.env.NODE_ENV] || defaultStreams;
+
+module.exports = bunyan.createLogger({
+  level: config.log.level,
+  name: config.app.name,
+  streams,
+  serializers: customSerializers
 });
-
-const logger = new (winston.Logger)({
-  transports: [
-    DEFAULT_TRANSPORT
-  ]
-});
-
-module.exports = logger;

@@ -8,9 +8,9 @@
     "lint": "eslint src test*",
     "pretest": "npm run lint",
     "test": "npm run test-unit && npm run test-integration && npm run test-acceptance",
-    "test-unit": "mocha --recursive tests/unit",
-    "test-integration": "mocha --recursive tests/integration",
-    "test-acceptance": "cucumber.js tests/acceptance/features -r tests/acceptance/step_definitions",
+    "test-unit": "NODE_ENV=test mocha --recursive tests/unit",
+    "test-integration": "NODE_ENV=test mocha --recursive tests/integration",
+    "test-acceptance": "NODE_ENV=test cucumber.js tests/acceptance/features -r tests/acceptance/step_definitions",
     "coverage-mocha": "istanbul cover  --lcovonly --dir ./coverage/unit _mocha -- --recursive tests/unit  --reporter mocha-lcov-reporter",
     "coverage-acceptance": "istanbul cover  --lcovonly --dir ./coverage/acceptance cucumber.js -- --tags ~@ignore --format json tests/acceptance/features -r tests/acceptance/step_definitions > /dev/null",
     "coverage-merge": "istanbul-combine coverage/**/coverage.json ",
@@ -45,12 +45,14 @@
   },
   "homepage": "https://github.com/IGZangelsanchez/nodejs-atdd-example",
   "dependencies": {
+    "bunyan": "^1.6.0",
+    "dev-null": "^0.1.1",
     "dotenv": "^2.0.0",
     "http-status-codes": "^1.0.6",
+    "lodash": "^4.5.0",
     "mongodb": "^2.1.7",
     "restify": "^4.0.4",
-    "tv4": "^1.2.7",
-    "winston": "^2.1.1"
+    "tv4": "^1.2.7"
   },
   "devDependencies": {
     "chai": "^3.5.0",
