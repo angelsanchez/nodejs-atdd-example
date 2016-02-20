@@ -4,7 +4,7 @@
 const fs = require('fs');
 const configJson = fs.existsSync(`${process.cwd()}/src/config.json`) ? require('./config.json') : undefined;
 
-const CONNECTION_POOL_SIZE = 20;
+require('dotenv').config();
 
 module.exports = {
   app: {
@@ -14,10 +14,6 @@ module.exports = {
   },
   database: {
     uri: process.env.DB_URI || configJson.database.uri,
-    connectOptions: {
-      server: {
-        poolSize: CONNECTION_POOL_SIZE
-      }
-    }
+    connectOptions: {}
   }
 };

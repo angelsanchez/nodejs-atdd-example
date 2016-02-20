@@ -27,9 +27,10 @@ describe('Storage save integration tests', () => {
   beforeEach(dropTestCollection);
 
   it('Persist on connect to mongodb', done => {
-    save('test', {x: 1}).then(test => {
+    const someVal = 1;
+    save('test', {x: someVal}).then(test => {
       expect(test._id).to.exist();
-      expect(test.x).to.equal(1);
+      expect(test.x).to.equal(someVal);
       done();
 
     }).catch(done.reject);

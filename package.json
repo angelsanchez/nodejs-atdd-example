@@ -45,6 +45,7 @@
   },
   "homepage": "https://github.com/IGZangelsanchez/nodejs-atdd-example",
   "dependencies": {
+    "dotenv": "^2.0.0",
     "http-status-codes": "^1.0.6",
     "mongodb": "^2.1.7",
     "restify": "^4.0.4",
