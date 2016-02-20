@@ -6,18 +6,10 @@ const logger = require('../logger');
 module.exports = (collectionName, customCriteria) => {
   const criteria = customCriteria || {};
 
-  return new Promise((resolve, reject) => {
-    connect().then(db => {
-
-      db.collection(collectionName).find(criteria, (error, cursor) => {
-        if (error) {
-          logger.error('Unable to retrieve from db, error: ', error);
-          reject(error);
-        }
-        resolve(cursor);
-      });
-
-    }).catch(reject);
-  });
-
+  return connect()
+    .then(db => db.collection(collectionName).find(criteria))
+    .catch(error => {
+      logger.error('Unable to retrieve from db, error: ', error);
+      Promise.reject(error);
+    });
 };

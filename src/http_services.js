@@ -25,8 +25,8 @@ registerServices(server);
 
 module.exports = {
   start: port => new Promise((resolve, reject) => {
-        server.listen(port, err => {
-          return err ? reject(err) : resolve(server);
-        });
-      })
+    server.listen(port, err => {
+      return err ? reject(err) : resolve(server);
+    });
+  })
 };

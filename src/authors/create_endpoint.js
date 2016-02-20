@@ -1,10 +1,10 @@
 'use strict';
 const HTTP = require('http-status-codes');
 
-const authorsCreate = require('./create');
+const createAuthor = require('./create');
 
 module.exports = (request, response, next) => {
-  authorsCreate(request.body)
+  createAuthor(request.body)
     .then(author => {
       response.json(HTTP.CREATED, {id: author._id});
       return next();
