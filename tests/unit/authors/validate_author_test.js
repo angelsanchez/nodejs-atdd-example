@@ -14,7 +14,7 @@ describe('Schema validation', () => {
 
   it('pass with a valid author', done => {
     validateAuthor(validAuthor).then(res => {
-      expect(res).to.be.undefined();
+      expect(res).to.deep.equal(validAuthor);
       return done();
     }).catch(done);
   });

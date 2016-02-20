@@ -6,7 +6,7 @@ module.exports = (obj, schema) => {
   const result = tv4.validateMultiple(obj, schema);
 
   if (result.valid) {
-    return Promise.resolve();
+    return Promise.resolve(obj);
   }
 
   const errors = result.errors.map(err => {
