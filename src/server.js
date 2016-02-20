@@ -2,7 +2,7 @@
 
 const restify = require('restify');
 const logger = require('./util/logger');
-const registerServices = require('./register_services');
+const registerServices = require('./register_routes');
 
 const server = restify.createServer();
 server.use(restify.queryParser());
