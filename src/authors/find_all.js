@@ -1,6 +1,6 @@
 'use strict';
 
-const storageFind = require('../storage/find');
+const storageFind = require('../storage/find_many');
 
 module.exports = () => {
   const criteria = {};

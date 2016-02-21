@@ -1,11 +1,11 @@
 'use strict';
 
-const connect = require('./connect');
+const connectCollection = require('./connect_collection');
 const logger = require('../util/logger');
 
 module.exports = collectionName => {
-  return connect()
-    .then(db => db.collection(collectionName).deleteMany({}))
+  return connectCollection(collectionName)
+    .then(col => col.deleteMany({}))
     .then(() => {
       logger.info('Deleted elements from db');
       return Promise.resolve();

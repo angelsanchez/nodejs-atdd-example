@@ -11,9 +11,9 @@
     "test-unit": "NODE_ENV=test mocha --recursive tests/unit",
     "test-integration": "NODE_ENV=test mocha --recursive tests/integration",
     "test-acceptance": "NODE_ENV=test cucumber.js tests/acceptance/features -r tests/acceptance/step_definitions",
-    "coverage-unit": "istanbul cover  --lcovonly --dir ./coverage/unit _mocha -- --recursive tests/unit --reporter mocha-lcov-reporter",
-    "coverage-integration": "istanbul cover  --lcovonly --dir ./coverage/integration _mocha -- --recursive tests/integration --reporter mocha-lcov-reporter",
-    "coverage-acceptance": "istanbul cover  --lcovonly --dir ./coverage/acceptance cucumber.js -- --tags ~@ignore --format json tests/acceptance/features -r tests/acceptance/step_definitions > /dev/null",
+    "coverage-unit": "istanbul cover --root src --include-all-sources --lcovonly --dir ./coverage/unit _mocha -- --recursive tests/unit --reporter mocha-lcov-reporter",
+    "coverage-integration": "istanbul cover --root src --include-all-sources --lcovonly --dir ./coverage/integration _mocha -- --recursive tests/integration --reporter mocha-lcov-reporter",
+    "coverage-acceptance": "istanbul cover --root src --include-all-sources --lcovonly --dir ./coverage/acceptance cucumber.js -- --tags ~@ignore --format json tests/acceptance/features -r tests/acceptance/step_definitions",
     "coverage-merge": "istanbul-combine coverage/**/coverage.json ",
     "coverage": "npm run coverage-unit && npm run coverage-integration && npm run coverage-acceptance && npm run coverage-merge",
     "coveralls": "istanbul-coveralls"

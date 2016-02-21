@@ -11,7 +11,7 @@ const invalidAuthor = {
 };
 
 const getCreateAuthorInstance = storageCreateStub => {
-  mockery.registerMock('../storage/save', storageCreateStub);
+  mockery.registerMock('../storage/save_one', storageCreateStub);
 
   mockery.enable({
     useCleanCache: true,

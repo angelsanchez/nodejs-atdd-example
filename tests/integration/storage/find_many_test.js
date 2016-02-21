@@ -1,35 +1,24 @@
 'use strict';
 
-const save = require('../../../src/storage/save');
-const find = require('../../../src/storage/find');
+const find = require('../../../src/storage/find_many');
 const mongodb = require('mongodb');
 const sinon = require('sinon');
 require('sinon-as-promised');
 const Logger = require('bunyan');
 const expect = require('../dirty-chai').expect;
 
-const dropTestCollection = require('./drop_test_collection');
+const dropTestCollection = require('./test_helpers').dropTestCollection;
+const insertSome = require('./test_helpers').insertSome;
 
-const doc1 = {
-  x: 1,
-  _id: 'doc1'
-};
-const doc2 = {
-  x: 2,
-  _id: 'doc2'
-};
+const doc1 = { x: 1, _id: 'doc1' };
+const doc2 = { x: 2, _id: 'doc2' };
 
 describe('Storage find integration tests', () => {
 
-  beforeEach(done => {
-    return dropTestCollection().then(() => {
-      return Promise.all([
-        save('test', doc1),
-        save('test', doc2)
-      ]).then(() => done()).catch(done);
-    });
-  });
-  afterEach(done => dropTestCollection().then(done).catch(done));
+  beforeEach(dropTestCollection);
+  beforeEach(done => insertSome(done, [doc1, doc2]));
+
+  afterEach(dropTestCollection);
 
   it('Finds all document with no criteria', done => {
 
@@ -48,16 +37,14 @@ describe('Storage find integration tests', () => {
 
   it('Finds no document with wrong criteria', done => {
 
-    find('test', { x: 3 }).then(found => {
-
-      return found.toArray().then(res => {
+    find('test', { x: 3 })
+      .then(found => found.toArray())
+      .then(res => {
         expect(res).to.exist();
         expect(res).to.be.an('array').with.length.of(0);
         return done();
 
       }).catch(done);
-    });
-
   });
 
   it('Logs error on failure', done => {
@@ -79,6 +66,5 @@ describe('Storage find integration tests', () => {
 
       });
   });
-
 
 });

@@ -31,6 +31,6 @@ module.exports = function() {
           done();
         }
       })
-      .catch(done.err);
+      .catch(done);
   });
 };

@@ -13,6 +13,6 @@ module.exports = function() {
         world.lastResponseBody = res.body;
         done();
       })
-      .catch(done.fail);
+      .catch(done);
   });
 };

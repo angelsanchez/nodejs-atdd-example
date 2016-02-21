@@ -4,7 +4,7 @@ const mockery = require('mockery');
 const expect = require('../dirty-chai').expect;
 
 const getFindAuthorsInstance = storageFindStub => {
-  mockery.registerMock('../storage/find', storageFindStub);
+  mockery.registerMock('../storage/find_many', storageFindStub);
 
   mockery.enable({
     useCleanCache: true,
