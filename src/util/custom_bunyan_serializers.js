@@ -4,6 +4,7 @@ const bunyan = require('bunyan');
 const omitBy = require('lodash/omitBy');
 const isEmpty = require('lodash/isEmpty');
 const isArray = require('lodash/isArray');
+const isNumber = require('lodash/isNumber');
 
 const reduceObject = (obj, fields) => {
   const striped = {};
@@ -12,7 +13,7 @@ const reduceObject = (obj, fields) => {
     striped[field] = obj[field];
   });
 
-  return omitBy(striped, isEmpty);
+  return omitBy(striped, val => isEmpty(val) && !isNumber(val));
 };
 
 module.exports = {

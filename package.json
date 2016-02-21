@@ -11,10 +11,11 @@
     "test-unit": "NODE_ENV=test mocha --recursive tests/unit",
     "test-integration": "NODE_ENV=test mocha --recursive tests/integration",
     "test-acceptance": "NODE_ENV=test cucumber.js tests/acceptance/features -r tests/acceptance/step_definitions",
-    "coverage-mocha": "istanbul cover  --lcovonly --dir ./coverage/unit _mocha -- --recursive tests/unit  --reporter mocha-lcov-reporter",
+    "coverage-unit": "istanbul cover  --lcovonly --dir ./coverage/unit _mocha -- --recursive tests/unit --reporter mocha-lcov-reporter",
+    "coverage-integration": "istanbul cover  --lcovonly --dir ./coverage/integration _mocha -- --recursive tests/integration --reporter mocha-lcov-reporter",
     "coverage-acceptance": "istanbul cover  --lcovonly --dir ./coverage/acceptance cucumber.js -- --tags ~@ignore --format json tests/acceptance/features -r tests/acceptance/step_definitions > /dev/null",
     "coverage-merge": "istanbul-combine coverage/**/coverage.json ",
-    "coverage": "npm run coverage-mocha && npm run coverage-acceptance && npm run coverage-merge",
+    "coverage": "npm run coverage-unit && npm run coverage-integration && npm run coverage-acceptance && npm run coverage-merge",
     "coveralls": "istanbul-coveralls"
   },
   "pre-commit": [
@@ -68,7 +69,8 @@
     "mockery": "1.4.0",
     "pre-commit": "^1.1.2",
     "request-promise": "^2.0.1",
-    "sinon": "^1.17.3"
+    "sinon": "^1.17.3",
+    "sinon-as-promised": "^4.0.0"
   },
   "engines": {
     "node": ">= 4.3"
