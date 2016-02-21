@@ -26,9 +26,8 @@ describe('Storage find integration tests', () => {
 
       return found.toArray().then(res => {
         expect(res).to.exist();
-        expect(res).to.be.an('array').with.length.of(2);
-        expect(res[0]).to.deep.equal(doc1);
-        expect(res[1]).to.deep.equal(doc2);
+        expect(res).to.be.an('array')
+          .that.deep.include.members([doc1, doc2]);
         return done();
 
       }).catch(done);
