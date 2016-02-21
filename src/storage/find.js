@@ -10,6 +10,6 @@ module.exports = (collectionName, customCriteria) => {
     .then(db => db.collection(collectionName).find(criteria))
     .catch(error => {
       logger.error('Unable to retrieve from db, error: ', error);
-      Promise.reject(error);
+      return Promise.reject(error);
     });
 };

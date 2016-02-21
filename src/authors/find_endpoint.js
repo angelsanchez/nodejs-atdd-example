@@ -11,6 +11,6 @@ module.exports = (request, response, next) => {
       return next();
     }).catch(error => {
     response.json(HTTP.INTERNAL_SERVER_ERROR, {error});
-    return next();
+    return next(error);
   });
 };

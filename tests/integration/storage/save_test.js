@@ -1,23 +1,18 @@
 'use strict';
 
 const save = require('../../../src/storage/save');
-const connect = require('../../../src/storage/connect');
 const mongodb = require('mongodb');
 const sinon = require('sinon');
 require('sinon-as-promised');
 const Logger = require('bunyan');
 const expect = require('../dirty-chai').expect;
 
-const dropTestCollection = done => connect()
-  .then(db => {
-    const col = db.listCollections({name: 'test'})[0];
-    return col ? db.dropCollection(col).then(done) : done();
-  }).catch(done);
+const dropTestCollection = require('./drop_test_collection');
 
 describe('Storage save integration tests', () => {
 
-  afterEach(dropTestCollection);
-  beforeEach(dropTestCollection);
+  beforeEach(done => dropTestCollection().then(done).catch(done));
+  afterEach(done => dropTestCollection().then(done).catch(done));
 
   it('Persist on connect to mongodb', done => {
     const someVal = 1;
