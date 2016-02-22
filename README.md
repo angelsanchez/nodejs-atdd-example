@@ -10,3 +10,9 @@ ATDD Example using NodeJS
 
 - migrate to Cucumber.js 0.9+
 - improve coverage
+
+## Maintainers
+
+- [guumaster](https://github.com/guumaster)
+- [alejandrogr](https://github.com/alejandrogr)
+- [d3b4s](https://github.com/angelsanchez/)
