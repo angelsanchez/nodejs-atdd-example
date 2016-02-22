@@ -1,12 +1,12 @@
 machine:
     node:
-        version: 4.2.2
+        version: 4.3
     services:
         - mongodb
 test:
     pre:
         - cp src/config_sample.json src/config.json
     override:
-        - npm run test-unit
-        - npm run test-integration
-        - npm run test-coverage
+        - npm run test
+        - npm run coverage
+        - npm run coveralls

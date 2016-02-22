@@ -2,18 +2,24 @@
   "name": "nodejs-atdd-example",
   "version": "0.0.1",
   "description": "ATDD Example",
-  "main": "bin/server.js",
+  "main": "bin/server",
   "scripts": {
-    "start": "node ./src/start.js",
-    "test-unit": "./node_modules/.bin/mocha --recursive test-unit",
-    "test-integration": "./node_modules/.bin/mocha --recursive test-integration",
-    "test-acceptance": "./node_modules/.bin/cucumber.js test-acceptance/features -r test-acceptance/step_definitions",
-    "test-coverage": "node node_modules/istanbul/lib/cli.js cover ./node_modules/.bin/cucumber.js --lcovonly -- test-acceptance/features -r test-acceptance/step_definitions && istanbul-coveralls"
+    "start": "node ./bin/server",
+    "lint": "eslint src test*",
+    "pretest": "npm run lint",
+    "test": "npm run test-unit && npm run test-integration && npm run test-acceptance",
+    "test-unit": "NODE_ENV=test mocha --recursive tests/unit",
+    "test-integration": "NODE_ENV=test mocha --recursive tests/integration",
+    "test-acceptance": "NODE_ENV=test cucumber.js tests/acceptance/features -r tests/acceptance/step_definitions",
+    "coverage-unit": "istanbul cover --root src --include-all-sources --lcovonly --dir ./coverage/unit _mocha -- --recursive tests/unit --reporter mocha-lcov-reporter",
+    "coverage-integration": "istanbul cover --root src --include-all-sources --lcovonly --dir ./coverage/integration _mocha -- --recursive tests/integration --reporter mocha-lcov-reporter",
+    "coverage-acceptance": "istanbul cover --root src --include-all-sources --lcovonly --dir ./coverage/acceptance cucumber.js -- --tags ~@ignore --format json tests/acceptance/features -r tests/acceptance/step_definitions",
+    "coverage-merge": "istanbul-combine coverage/**/coverage.json ",
+    "coverage": "npm run coverage-unit && npm run coverage-integration && npm run coverage-acceptance && npm run coverage-merge",
+    "coveralls": "istanbul-coveralls"
   },
   "pre-commit": [
-    "style",
-    "lint",
-    "test"
+    "lint"
   ],
   "repository": {
     "type": "git",
@@ -24,30 +30,49 @@
     "api",
     "template"
   ],
-  "author": "Angel Sanchez",
+  "contributors": [
+    {
+      "name": "Angel Sanchez",
+      "url": "http://github.com/angelsanchez/"
+    },
+    {
+      "name": "Gustavo Marin",
+      "url": "http://github.com/guumaster/"
+    }
+  ],
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/IGZangelsanchez/nodejs-atdd-example/issues"
   },
   "homepage": "https://github.com/IGZangelsanchez/nodejs-atdd-example",
   "dependencies": {
-    "mongodb": "2.0.45",
-    "restify": "4.0.3",
-    "tv4": "^1.2.7",
-    "winston": "1.1.1"
+    "bunyan": "^1.6.0",
+    "dev-null": "^0.1.1",
+    "dotenv": "^2.0.0",
+    "http-status-codes": "^1.0.6",
+    "lodash": "^4.5.0",
+    "mongodb": "^2.1.7",
+    "restify": "^4.0.4",
+    "tv4": "^1.2.7"
   },
   "devDependencies": {
-    "chai": "3.4.1",
+    "chai": "^3.5.0",
     "coveralls": "2.11.6",
     "cucumber": "0.6.0",
+    "dirty-chai": "^1.2.2",
+    "eslint": "^2.2.0",
     "istanbul": "0.4.2",
+    "istanbul-combine": "^0.3.0",
     "istanbul-coveralls": "1.0.3",
-    "mocha": "2.3.4",
+    "mocha": "^2.4.5",
+    "mocha-lcov-reporter": "^1.1.0",
     "mockery": "1.4.0",
-    "request": "2.64.0",
-    "sinon": "1.17.1"
+    "pre-commit": "^1.1.2",
+    "request-promise": "^2.0.1",
+    "sinon": "^1.17.3",
+    "sinon-as-promised": "^4.0.0"
   },
   "engines": {
-    "node": ">= 4.2.2"
+    "node": ">= 4.3"
   }
 }

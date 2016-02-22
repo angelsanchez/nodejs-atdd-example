@@ -1,26 +1,30 @@
 'use strict';
 
 const tv4 = require('tv4');
+const isEmpty = require('lodash/isEmpty');
 
 module.exports = (obj, schema) => {
-    let result = tv4.validateMultiple(obj, schema);
 
-    if (result.valid) {
-        return Promise.resolve();
+  if (isEmpty(schema)) {
+    return Promise.reject(new Error('Can\'t validate against an empty schema'));
+  }
 
-    } else {
+  const result = tv4.validateMultiple(obj, schema);
 
-        let errors = result.errors.map(err => {
+  if (result.valid) {
+    return Promise.resolve(obj);
+  }
 
-            let errJson = { message: err.message };
+  const errors = result.errors.map(err => {
 
-            if (err.dataPath) {
-                errJson.dataPath = err.dataPath;
-            }
+    const errJson = {message: err.message};
 
-            return errJson;
-        });
-
-        return Promise.reject({code: 'validation_error', errors});
+    if (err.dataPath) {
+      errJson.dataPath = err.dataPath;
     }
+
+    return errJson;
+  });
+
+  return Promise.reject({code: 'validation_error', errors});
 };

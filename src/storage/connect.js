@@ -1,19 +1,19 @@
 'use strict';
 
-const config = require('../config.js');
 const MongoClient = require('mongodb').MongoClient;
-const logger = require('../logger');
 
-const connectionEstablished = new Promise((resolve, reject) => {
-    MongoClient.connect(config.database.uri, (error, db) => {
-        if (error) {
-            logger.error('Unable to connect to db: ' + error);
-            reject(error);
-        } else {
-            logger.info('Connected to db ' + config.database.uri);
-            resolve(db);
-        }
+const baseConfig = require('../config');
+const logger = require('../util/logger');
+
+module.exports = newConfig => {
+  const config = newConfig || baseConfig;
+  return MongoClient.connect(config.database.uri, config.database.connectOptions)
+    .then(db => {
+      logger.info(`Connected to db => ${config.database.uri}`);
+      return db;
+    })
+    .catch(error => {
+      logger.error('Unable to connect to db: ', error);
+      return Promise.reject(error);
     });
-});
-
-module.exports = () => connectionEstablished;
+};

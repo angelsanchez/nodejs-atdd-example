@@ -1,15 +1,8 @@
 'use strict';
 
-const save = require('../storage/save');
+const storageSaveOne = require('../storage/save_one');
 const validateAuthor = require('./validate_author');
 
-module.exports = author => {
-    return new Promise((resolve, reject)=> {
-        validateAuthor(author)
-            .then(() => save('authors', author))
-            .then((author)=> {
-                resolve(author);
-            })
-            .catch(reject);
-    });
-};
+const saveAuthor = author => storageSaveOne('authors', author);
+
+module.exports = author => validateAuthor(author).then(saveAuthor);
