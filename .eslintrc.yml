@@ -12,6 +12,10 @@ parserOptions:
     arrowFunctions: true
     objectLiteralShorthandMethods: true
     objectLiteralShorthandProperties: true
+plugins:
+  - promise
+  - smells
+  - filenames
 rules:
   arrow-parens: [2, 'as-needed']
   arrow-spacing: 2
@@ -61,3 +65,12 @@ rules:
   max-params: [0, 3]
   max-statements: [0, 10]
   complexity: [0, 11]
+  promise/param-names: 2
+  promise/always-return: 2
+  promise/always-catch: 2
+  smells/no-switch: 1
+  smells/no-complex-switch-case: 1
+  smells/no-setinterval: 1
+  smells/no-this-assign: 1
+  smells/no-complex-string-concat: 1
+  filenames/filenames: [2, "^[a-z_]+$"]

@@ -5,7 +5,7 @@ const HTTP = require('http-status-codes');
 const clientAPI = require('../../client_app/client_api');
 
 module.exports = function() {
-  this.When(/^the following created authors$/, (authorsTable, done) => {
+  this.Given(/^the following created authors$/, (authorsTable, done) => {
     const authorsToCreate = authorsTable.hashes().map(authorRow => {
       return {
         _id: authorRow.Id,
@@ -26,10 +26,9 @@ module.exports = function() {
     Promise.all(createAuthorsPromises)
       .then(responses => {
         if (responses.some(res => res.statusCode !== HTTP.CREATED)) {
-          done(new Error('Invalid response code(s) creating authors'));
-        } else {
-          done();
+          return done(new Error('Invalid response code(s) creating authors'));
         }
+        return done();
       })
       .catch(done);
   });
