@@ -1,6 +1,6 @@
 'use strict';
 
-const expect = require('../dirty-chai').expect;
+const expect = require('../../dirty_chai').expect;
 const validateAuthor = require('../../../src/authors/validate_author');
 const testData = require('./test_data');
 

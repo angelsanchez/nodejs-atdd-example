@@ -2,7 +2,7 @@
 
 const HTTP = require('http-status-codes');
 const mockery = require('mockery');
-const expect = require('../dirty-chai').expect;
+const expect = require('../../dirty_chai').expect;
 const sinon = require('sinon');
 
 const authorList = [

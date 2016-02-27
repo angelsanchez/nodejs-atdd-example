@@ -1,7 +1,7 @@
 'use strict';
 
 const validator = require('../../../src/util/validator');
-const expect = require('../dirty-chai').expect;
+const expect = require('../../dirty_chai').expect;
 
 const BASE_SCHEMA = {
   "$schema": "http://json-schema.org/draft-04/schema#",
@@ -28,7 +28,7 @@ const BASE_SCHEMA = {
   }
 };
 
-const VALID_OBJECT = { id: 300, list: [ 'this', 'is', 'a', 'list'] };
+const VALID_OBJECT = { id: 300, list: [ 'this', 'is', 'a', 'list' ] };
 
 const INVALID_OBJECT = { id: 100, list: [1,'valid', 2] };
 

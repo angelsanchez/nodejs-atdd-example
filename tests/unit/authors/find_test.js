@@ -1,7 +1,7 @@
 'use strict';
 
 const mockery = require('mockery');
-const expect = require('../dirty-chai').expect;
+const expect = require('../../dirty_chai').expect;
 
 const getFindAuthorsInstance = storageFindStub => {
   mockery.registerMock('../storage/find_many', storageFindStub);
@@ -29,19 +29,16 @@ describe('List of authors', () => {
 
   it('Should return the list of authors', done => {
 
-    const retrieveFromStorageStub = () => {
-      const retrieveCursor = {
+    const retrieveFromStorageStub = () => Promise.resolve({
         toArray: () => Promise.resolve(authorList)
-      };
-      return Promise.resolve(retrieveCursor);
-    };
+    });
 
     const findAuthors = getFindAuthorsInstance(retrieveFromStorageStub);
 
     findAuthors().then(authors => {
       expect(authors).to.deep.equal(authorList);
-      done();
-    }).catch(err => done(err));
+      return done();
+    }).catch(done);
   });
 
 });
