@@ -5,7 +5,7 @@ const mongodb = require('mongodb');
 const sinon = require('sinon');
 require('sinon-as-promised');
 const Logger = require('bunyan');
-const expect = require('../dirty-chai').expect;
+const expect = require('../../dirty_chai').expect;
 
 const dropTestCollection = require('./test_helpers').dropTestCollection;
 
@@ -20,7 +20,7 @@ describe('Storage save integration tests', () => {
     saveOne('test', doc1).then(test => {
       expect(test._id).to.exist();
       expect(test).to.equal(doc1);
-      done();
+      return done();
 
     }).catch(done);
   });
@@ -55,7 +55,7 @@ describe('Storage save integration tests', () => {
         expect(logErrorSpy.called).to.be.ok();
         insertOneStub.restore();
         logErrorSpy.restore();
-        done();
+        return done();
 
       });
   });
@@ -74,7 +74,7 @@ describe('Storage save integration tests', () => {
         expect(logErrorSpy.called).to.be.ok();
         insertOneStub.restore();
         logErrorSpy.restore();
-        done();
+        return done();
       });
   });
 

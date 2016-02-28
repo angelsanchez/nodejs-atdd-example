@@ -3,7 +3,7 @@
 const isEmpty = require('lodash/isEmpty');
 
 const connectCollection = require('./connect_collection');
-const logger = require('../util/logger');
+const logErrorAndReject = require('../util/log_error_and_reject');
 const LIMIT_ONE = 1;
 
 module.exports = (collectionName, criteria) => {
@@ -13,8 +13,5 @@ module.exports = (collectionName, criteria) => {
   }
   return connectCollection(collectionName)
     .then(col => col.find(criteria).limit(LIMIT_ONE).next())
-    .catch(err => {
-      logger.error(`Unable to retrieve element from db, collection name: ${collectionName} criteria: ${JSON.stringify(criteria)} error `, err);
-      return Promise.reject(err);
-    });
+    .catch(logErrorAndReject(`Unable to retrieve element from db, collection name: ${collectionName} criteria: ${JSON.stringify(criteria)} error`));
 };

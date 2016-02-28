@@ -6,7 +6,7 @@ const mongodb = require('mongodb');
 const sinon = require('sinon');
 require('sinon-as-promised');
 const Logger = require('bunyan');
-const expect = require('../dirty-chai').expect;
+const expect = require('../../dirty_chai').expect;
 
 const dropTestCollection = require('./test_helpers').dropTestCollection;
 const insertSome = require('./test_helpers').insertSome;
@@ -29,14 +29,14 @@ describe('Storage update integration tests', () => {
         another: 4
       }
     };
-    const newDoc = { _id: doc1._id, another: 4, x: 3};
+    const newDoc = { _id: doc1._id, another: 4, x: 3 };
 
     updateOne('test', doc1, update).then(() => {
 
       return findOne('test', { _id: doc1._id })
         .then(result => {
           expect(result).to.be.an('object').with.deep.equal(newDoc);
-          done();
+          return done();
         });
 
     }).catch(done);
@@ -91,7 +91,7 @@ describe('Storage update integration tests', () => {
         expect(logErrorSpy.called).to.be.ok();
         findStub.restore();
         logErrorSpy.restore();
-        done();
+        return done();
 
       });
   });

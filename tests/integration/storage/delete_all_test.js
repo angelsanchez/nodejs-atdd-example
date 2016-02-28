@@ -6,7 +6,7 @@ const mongodb = require('mongodb');
 const sinon = require('sinon');
 require('sinon-as-promised');
 const Logger = require('bunyan');
-const expect = require('../dirty-chai').expect;
+const expect = require('../../dirty_chai').expect;
 
 const dropTestCollection = require('./test_helpers').dropTestCollection;
 const insertSome = require('./test_helpers').insertSome;
@@ -29,9 +29,8 @@ describe('Storage delete integration tests', () => {
         .then(cursor => cursor.toArray())
         .then(result => {
         expect(result).to.be.an('array').with.length.of(0);
-        done();
+        return done();
       });
-
 
     }).catch(done);
   });
@@ -51,7 +50,7 @@ describe('Storage delete integration tests', () => {
         expect(logErrorSpy.called).to.be.ok();
         findStub.restore();
         logErrorSpy.restore();
-        done();
+        return done();
 
       });
   });

@@ -2,7 +2,7 @@
 
 const HTTP = require('http-status-codes');
 const serializers = require('../../../src/util/custom_bunyan_serializers');
-const expect = require('../dirty-chai').expect;
+const expect = require('../../dirty_chai').expect;
 
 describe('Custom serializers', () => {
 

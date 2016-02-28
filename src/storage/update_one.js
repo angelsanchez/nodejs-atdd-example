@@ -3,7 +3,7 @@
 const isEmpty = require('lodash/isEmpty');
 
 const connectCollection = require('./connect_collection');
-const logger = require('../util/logger');
+const logErrorAndReject = require('../util/log_error_and_reject');
 
 module.exports = (collectionName, criteria, update) => {
 
@@ -13,8 +13,5 @@ module.exports = (collectionName, criteria, update) => {
 
   return connectCollection(collectionName)
     .then(col => col.updateOne(criteria, update))
-    .catch(err => {
-      logger.error(`Unable to update element from db, collection name: ${collectionName}, criteria: ${JSON.stringify(criteria)} error:`, err);
-      return Promise.reject(err);
-    });
+    .catch(logErrorAndReject(`Unable to update element from db, collection name: ${collectionName}, criteria: ${JSON.stringify(criteria)} error`));
 };

@@ -1,18 +1,13 @@
 'use strict';
 
 const connectCollection = require('./connect_collection');
-const logger = require('../util/logger');
+const logErrorAndReject = require('../util/log_error_and_reject');
+const logAndResolve = require('../util/log_and_resolve');
 
 module.exports = collectionName => {
   return connectCollection(collectionName)
     .then(col => col.deleteMany({}))
-    .then(() => {
-      logger.info('Deleted elements from db');
-      return Promise.resolve();
-    })
-    .catch(err => {
-      logger.error('Unable to deleteMany from db: ', err);
-      return Promise.reject(err);
-    });
+    .then(logAndResolve('Deleted all elements from db'))
+    .catch(logErrorAndReject('Unable to deleteMany from db'));
 
 };

@@ -6,7 +6,5 @@ module.exports = () => {
   const criteria = {};
 
   return storageFind('authors', criteria)
-    .then(authorsCursor => {
-      return authorsCursor.toArray();
-    });
+    .then(cursor => cursor.toArray());
 };

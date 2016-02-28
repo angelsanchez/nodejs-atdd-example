@@ -2,7 +2,7 @@
 
 const config = require('../../../src/config');
 const connect = require('../../../src/storage/connect');
-const expect = require('../dirty-chai').expect;
+const expect = require('../../dirty_chai').expect;
 
 describe('Storage connect integration tests', () => {
 

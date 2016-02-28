@@ -1,7 +1,7 @@
 'use strict';
 
 const mockery = require('mockery');
-const expect = require('../dirty-chai').expect;
+const expect = require('../../dirty_chai').expect;
 const testData = require('./test_data');
 
 const validAuthor = testData.validAuthor;
@@ -42,8 +42,8 @@ describe('Create authors', () => {
     createAuthor(validAuthor).then(author => {
       expect(author).to.deep.equal(createdAuthor);
       expect(author._id).to.exist();
-      done();
-    }).catch(err => done(err));
+      return done();
+    }).catch(done);
   });
 
   it('Should return an error because the author is invalid', done => {
@@ -57,7 +57,7 @@ describe('Create authors', () => {
       .catch(err => {
         expect(err.code).to.equal('validation_error');
         expect(err.errors).to.exist();
-        done();
+        return done();
       });
   });
 

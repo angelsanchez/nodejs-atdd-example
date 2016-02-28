@@ -11,7 +11,7 @@ module.exports = function() {
       .then(res => {
         world.lastResponseStatusCode = res.statusCode;
         world.lastResponseBody = res.body;
-        done();
+        return done();
       })
       .catch(done);
   });

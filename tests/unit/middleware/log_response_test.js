@@ -2,7 +2,7 @@
 
 const mockery = require('mockery');
 const sinon = require('sinon');
-const expect = require('../dirty-chai').expect;
+const expect = require('../../dirty_chai').expect;
 
 const getLogResponseInstance = loggerStub => {
   mockery.registerMock('../util/logger', loggerStub);

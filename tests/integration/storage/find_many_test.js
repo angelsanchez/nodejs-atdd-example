@@ -5,7 +5,7 @@ const mongodb = require('mongodb');
 const sinon = require('sinon');
 require('sinon-as-promised');
 const Logger = require('bunyan');
-const expect = require('../dirty-chai').expect;
+const expect = require('../../dirty_chai').expect;
 
 const dropTestCollection = require('./test_helpers').dropTestCollection;
 const insertSome = require('./test_helpers').insertSome;
@@ -30,8 +30,8 @@ describe('Storage find integration tests', () => {
           .that.deep.include.members([doc1, doc2]);
         return done();
 
-      }).catch(done);
-    });
+      });
+    }).catch(done);
   });
 
   it('Finds no document with wrong criteria', done => {
